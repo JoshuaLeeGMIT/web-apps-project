@@ -12,6 +12,27 @@ app.use(parser.urlencoded({
 app.use(parser.json());
 
 app.post('/create', (req, res) => {
+  if (mysql.countryExists(req.body.code))
+    res.send("Code " + req.body.code + " already exists")
+  if (req.body.code.length < 3 || req.body.name < 3)
+    res.send("Code and name must be longer than 3 characters");
+
+  let q = {
+    sql: 'insert into country (co_code, co_name, co_details) values (?, ?, ?)',
+    values: [req.body.code, req.body.name, req.body.details]
+  };
+  mysql.addCountry(q).then((result) => {
+    res.send("Successfully added");
+  }).catch((err) => {
+    console.log(err);
+  })
+})
+
+app.get('/create', (req, res) => {
+  res.render('create');
+})
+
+app.post('/create', (req, res) => {
   let q = {
     sql: 'insert into country (co_code, co_name, co_details) values (?, ?, ?)',
     values: [req.body.code, req.body.name, req.body.details]

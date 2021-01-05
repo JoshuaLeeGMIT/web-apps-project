@@ -13,6 +13,23 @@ mysql.createPool({
   console.log(err);
 })
 
+var countryExists = function(code) {
+  let q = {
+    sql: 'select * from country where co_code = ?',
+    values: [code]
+  };
+  new Promise((resolve, reject) => {
+    pool.query(q).then((result) => {
+      if (result.length === 0)
+        resolve(false);
+      else
+        resolve(true);
+    }).catch((err) => {
+      console.log(err);
+    })
+  })
+}
+
 var addCountry = function(query) {
   return new Promise((resolve, reject) => {
     pool.query(query).then((result) => {
@@ -71,4 +88,4 @@ var getCities = function() {
   })
 }
 
-module.exports = {getCountries, getCities, delCountry, getCityDetails, addCountry}
+module.exports = {getCountries, getCities, delCountry, getCityDetails, addCountry, countryExists}
