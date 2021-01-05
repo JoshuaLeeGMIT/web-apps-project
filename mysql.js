@@ -35,6 +35,9 @@ var countryExists = function(code) {
   })
 }
 
+/* Function to add country to database, based on query
+ * constructed in main.js.
+ */
 var addCountry = function(query) {
   return new Promise((resolve, reject) => {
     pool.query(query).then((result) => {
@@ -45,8 +48,12 @@ var addCountry = function(query) {
   })
 }
 
+/* Function to get single row from database country table
+ * based on id passed in from main.js.
+ */
 var getCountryDetails = function(id) {
   return new Promise((resolve, reject) => {
+    /* Construct query. */
     let q = {
       sql: 'select * from country where co_code = ?',
       values: [id]
@@ -59,8 +66,12 @@ var getCountryDetails = function(id) {
   })
 }
 
+/* Function to get single row from database city table
+ * based on id passed in from main.js.
+ */
 var getCityDetails = function(id) {
   return new Promise((resolve, reject) => {
+    /* Construct query. */
     let q = {
       sql: 'select * from city where cty_code = ?',
       values: [id]
@@ -73,8 +84,12 @@ var getCityDetails = function(id) {
   })
 }
 
+/* Function to delete row from country table based
+ * on id passed in from main.js.
+ */
 var delCountry = function(id) {
   return new Promise((resolve, reject) => {
+    /* Construct query. */
     let q = {
       sql: 'delete from country where co_code = ?',
       values: [id]
@@ -87,6 +102,7 @@ var delCountry = function(id) {
   })
 }
 
+/* Function to get all rows from country table. */
 var getCountries = function() {
   return new Promise((resolve, reject) => {
     pool.query('select * from country').then((result) => {
@@ -97,6 +113,7 @@ var getCountries = function() {
   })
 }
 
+/* Function to get all rows from city table. */
 var getCities = function() {
   return new Promise((resolve, reject) => {
     pool.query('select * from city').then((result) => {

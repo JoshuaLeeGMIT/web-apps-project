@@ -8,6 +8,7 @@ mongo.connect('mongodb://localhost:27017').then((client) => {
   console.log(err);
 })
 
+/* Function to add a head of state to database. */
 var addHos = function(hos) {
   return new Promise((resolve, reject) => {
     coll.insertOne(hos).then((docs) => {
@@ -18,6 +19,7 @@ var addHos = function(hos) {
   })
 }
 
+/* Function to return all data in database. */
 var getHos = function() {
   return new Promise((resolve, reject) => {
     coll.find().toArray().then((docs) => {
