@@ -7,6 +7,16 @@ mongo.connect('mongodb://localhost:27017').then((client) => {
   console.log(err);
 })
 
+var addHos = function(hos) {
+  return new Promise((resolve, reject) => {
+    coll.insertOne(hos).then((docs) => {
+      resolve(docs);
+    }).catch((err) => {
+      reject(err);
+    })
+  })
+}
+
 var getHos = function() {
   return new Promise((resolve, reject) => {
     coll.find().toArray().then((docs) => {
@@ -17,4 +27,4 @@ var getHos = function() {
   })
 }
 
-module.exports = {getHos}
+module.exports = {getHos, addHos}

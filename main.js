@@ -37,6 +37,23 @@ app.get('/update/:id', (req, res) => {
   })
 })
 
+app.get('/create-hos', (req, res) => {
+  if (!mysql.countryExists(req.body.code))
+    res.send("Cannot add head of state for non-existent country " + req.body.code);
+  if (req.body.code.length < 3 || req.body.name.length < 3)
+    res.send("Country code and head of state must be at least 3 characters");
+  
+  let hos = {
+    code: req.body.code,
+    name: req.body.name
+  };
+  mongo.addHos(hos).then((result) => {
+    res.render('/hos');
+  }).catch((err) => {
+    console.log(err);
+  })
+})
+
 app.post('/create', (req, res) => {
   if (mysql.countryExists(req.body.code))
     res.send("Code " + req.body.code + " already exists")
