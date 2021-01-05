@@ -7,6 +7,18 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.get('/details/:id', (req, res) => {
+  res.send(req.params.id);
+})
+
+app.get('/update/:id', (req, res) => {
+  res.send(req.params.id);
+})
+
+app.get('/delete/:id', (req, res) => {
+  res.send(req.params.id);
+})
+
 app.get('/hos', (req, res) => {
   mongo.getHos().then((result) => {
     res.render('hos', {heads: result})
