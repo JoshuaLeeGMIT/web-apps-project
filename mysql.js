@@ -14,7 +14,11 @@ mysql.createPool({
 
 var getCityDetails = function(id) {
   return new Promise((resolve, reject) => {
-    pool.query('select * from city where cty_code = ?', id).then((result) => {
+    let q = {
+      sql: 'select * from city where cty_code = ?',
+      values: [id]
+    }
+    pool.query(q.sql, q.id).then((result) => {
       resolve(result);
     }).catch((err) => {
       reject(err);
