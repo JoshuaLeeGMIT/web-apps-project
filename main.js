@@ -8,7 +8,11 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.get('/details/:id', (req, res) => {
-  res.send(req.params.id);
+  mysql.getCityDetails(req.params.id).then((result) => {
+    res.render('city-details', {city: result})
+  }).catch((err) => {
+    console.log(err);
+  })
 })
 
 app.get('/update/:id', (req, res) => {

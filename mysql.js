@@ -12,6 +12,20 @@ mysql.createPool({
   console.log(err);
 })
 
+var getCityDetails = function(id) {
+  return new Promise((resolve, reject) => {
+    pool.query('select * from city where cty_code = ?', id).then((result) => {
+      resolve(result);
+    }).catch((err) => {
+      reject(err);
+    })
+  })
+}
+
+var delCountry = function(id) {
+
+}
+
 var getCountries = function() {
   return new Promise((resolve, reject) => {
     pool.query('select * from country').then((result) => {
@@ -32,4 +46,4 @@ var getCities = function() {
   })
 }
 
-module.exports = {getCountries, getCities}
+module.exports = {getCountries, getCities, delCountry, getCityDetails}
