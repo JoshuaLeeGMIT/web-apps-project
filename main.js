@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.use(parser.urlencoded({
   extended: false
 }));
-app.user(parser.json());
+app.use(parser.json());
 
 app.post('/create', (req, res) => {
   mysql.addCountry(req.body.code, req.body.name, req.body.details).then((result) => {
@@ -27,7 +27,7 @@ app.get('/details/:id', (req, res) => {
   })
 })
 
-app.get('/update/:id', (req, res) => {
+app.post('/update/:id', (req, res) => {
   res.send(req.params.id);
 })
 
