@@ -27,7 +27,17 @@ var getCityDetails = function(id) {
 }
 
 var delCountry = function(id) {
-
+  return new Promise((resolve, reject) => {
+    let q = {
+      sql: 'delete from country where co_code = ?',
+      values: [id]
+    };
+    pool.query(q.sql, q.id).then((result) => {
+      resolve(result);
+    }).catch((err) => {
+      console.log(err);
+    })
+  })
 }
 
 var getCountries = function() {
