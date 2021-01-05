@@ -21,7 +21,10 @@ app.post('/create', (req, res) => {
 
 app.get('/details/:id', (req, res) => {
   mysql.getCityDetails(req.params.id).then((result) => {
-    res.render('city-details', {city: result})
+    if (result.length !== 0)
+      res.render('city-details', {city: result})
+    else
+      res.send("No results");
   }).catch((err) => {
     res.send("No city with code " + id);
   })
