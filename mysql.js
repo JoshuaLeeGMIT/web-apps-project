@@ -18,7 +18,7 @@ var getCityDetails = function(id) {
     let q = {
       sql: 'select * from city where cty_code = ?',
       values: [id]
-    }
+    };
     pool.query(q).then((result) => {
       resolve(result);
     }).catch((err) => {
