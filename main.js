@@ -116,7 +116,14 @@ app.get('/details/:id', (req, res) => {
 
 /* Handle POST on update page. */
 app.post('/update/:id', (req, res) => {
-  res.send(req.params.id);
+  if (!mysql.countryExists(req.params.id))
+    res.send("No country code " + req.params.id);
+  
+  mysql.getCountryDetails(req.params.id).then((result) => {
+    res.render('update', {country: result});
+  }).catch((err) => {
+    res.send(err);
+  })
 })
 
 /* Handle GET for delete page and pass id to MySQL DOA. */
