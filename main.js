@@ -21,7 +21,10 @@ app.get('/update/:id', (req, res) => {
 
 app.get('/delete/:id', (req, res) => {
   mysql.delCountry(req.params.id).then((result) => {
-    res.send("Delete successful");
+    if (result.affectedRows > 0)
+      res.send("Delete successful");
+    else
+      res.send("Non-existent country");
   }).catch((err) => {
     res.send(err);
   })
