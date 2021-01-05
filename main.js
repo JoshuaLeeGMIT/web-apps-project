@@ -20,7 +20,11 @@ app.get('/update/:id', (req, res) => {
 })
 
 app.get('/delete/:id', (req, res) => {
-  res.send(req.params.id);
+  mysql.delCountry(req.params.id).then((result) => {
+    res.send("Delete successful");
+  }).catch((err) => {
+    res.send(err);
+  })
 })
 
 app.get('/hos', (req, res) => {
