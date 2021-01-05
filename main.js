@@ -1,5 +1,6 @@
 const ejs = require('ejs');
 const express = require('express');
+const mongo = require('./mongodb');
 const mysql = require('./mysql');
 
 const app = express();
@@ -7,7 +8,11 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.get('/hos', (req, res) => {
-  res.render('hos');
+  mongo.getHos().then((result) => {
+    res.render('hos', {heads: result})
+  }).catch((err) => {
+    res.send(err);
+  })
 })
 
 app.get('/cities', (req, res) => {

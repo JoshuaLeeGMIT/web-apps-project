@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <h1>Heads of state</h1>
+    <table>
+      <tr>
+        <th>Country code</th>
+        <th>Head of state</th>
+      </tr>
+<% heads.forEach((hos)) => { %>
+      <tr>
+        <td><%=hos._id></td>
+        <td><%=hos.headOfState</td>
+      </tr>
+<% }) %>
+    </table>
+  </body>
+</html>
