@@ -13,13 +13,9 @@ mysql.createPool({
   console.log(err);
 })
 
-var addCountry = function(code, name, details) {
+var addCountry = function(query) {
   return new Promise((resolve, reject) => {
-    let q = {
-      sql: 'insert into country (co_code, co_name, co_details) values (?, ?, ?)',
-      values: [code, name, details]
-    };
-    pool.query(q).then((result) => {
+    pool.query(query).then((result) => {
       resolve(result);
     }).catch((err) => {
       reject(err);

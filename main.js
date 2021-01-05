@@ -12,7 +12,11 @@ app.use(parser.urlencoded({
 app.use(parser.json());
 
 app.post('/create', (req, res) => {
-  mysql.addCountry(req.body.code, req.body.name, req.body.details).then((result) => {
+  let q = {
+    sql: 'insert into country (co_code, co_name, co_details) values (?, ?, ?)',
+    values: [req.body.code, req.body.name, req.body.details]
+  };
+  mysql.addCountry(q).then((result) => {
     res.send("Successfully added");
   }).catch((err) => {
     console.log(err);
