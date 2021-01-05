@@ -1,3 +1,4 @@
+const { query } = require('express');
 const mysql = require('promise-mysql');
 
 mysql.createPool({
@@ -18,7 +19,7 @@ var getCityDetails = function(id) {
       sql: 'select * from city where cty_code = ?',
       values: [id]
     }
-    pool.query(q.sql, q.id).then((result) => {
+    pool.query(q).then((result) => {
       resolve(result);
     }).catch((err) => {
       reject(err);
@@ -32,7 +33,7 @@ var delCountry = function(id) {
       sql: 'delete from country where co_code = ?',
       values: [id]
     };
-    pool.query(q.sql, q.id).then((result) => {
+    pool.query(q).then((result) => {
       resolve(result);
     }).catch((err) => {
       console.log(err);
