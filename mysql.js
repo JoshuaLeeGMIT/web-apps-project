@@ -40,6 +40,20 @@ var addCountry = function(query) {
   })
 }
 
+var getCountryDetails = function(id) {
+  return new Promise((resolve, reject) => {
+    let q = {
+      sql: 'select * from country where co_code = ?',
+      values: [id]
+    };
+    pool.query(q).then((result) => {
+      resolve(result);
+    }).catch((err) => {
+      reject(err);
+    })
+  })
+}
+
 var getCityDetails = function(id) {
   return new Promise((resolve, reject) => {
     let q = {
@@ -88,4 +102,4 @@ var getCities = function() {
   })
 }
 
-module.exports = {getCountries, getCities, delCountry, getCityDetails, addCountry, countryExists}
+module.exports = {getCountries, getCities, delCountry, getCityDetails, getCountryDetails, addCountry, countryExists}

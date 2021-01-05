@@ -11,6 +11,32 @@ app.use(parser.urlencoded({
 }));
 app.use(parser.json());
 
+app.post('/update/:id', (req, res) => {
+  if (req.body.code.length < 3 || req.body.name < 3)
+    res.send("Code and name must be longer than 3 characters");
+
+  let q = {
+    sql: 'update country set co_name = ?, co_details = ?',
+    values: [req.body.name, req.body.details]
+  };
+  mysql.addCountry(q).then((result) => {
+    res.send("Successfully updated");
+  }).catch((err) => {
+    console.log(err);
+  })
+})
+
+app.get('/update/:id', (req, res) => {
+  mysql.getCountryDetails(req.params.id).then((result) => {
+    if (result.length !== 0)
+      res.render('update', {country: result})
+    else
+      res.send("No results");
+  }).catch((err) => {
+    console.log(err);
+  })
+})
+
 app.post('/create', (req, res) => {
   if (mysql.countryExists(req.body.code))
     res.send("Code " + req.body.code + " already exists")
