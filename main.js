@@ -1,5 +1,6 @@
 const ejs = require('ejs');
 const express = require('express');
+const mysql = require('./mysql');
 
 const app = express();
 
@@ -14,7 +15,11 @@ app.get('/cities', (req, res) => {
 })
 
 app.get('/countries', (req, res) => {
-  res.render('countries');
+  mysql.getCountries().then((result) => {
+    res.render('countries', {countries: result})
+  }).catch((err) => {
+    res.send(err);
+  })
 })
 
 app.get('/', (req, res) => {

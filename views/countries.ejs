@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <h1>Countries</h1>
+    <table>
+      <tr>
+        <th>Country code</th>
+        <th>Country name</th>
+        <th>Country details</th>
+        <th>Action</th>
+      </tr>
+<% countries.forEach((country)) => { %>
+      <tr>
+        <td><%=country.co_code></td>
+        <td><%=country.co_name</td>
+        <td><%=country.co_details</td>
+        <td><a href="/update:country.co_code">Update</a></td>
+        <td><a href="/delete:country.co_code">Delete</a></td>
+      </tr>
+<% }) %>
+    </table>
+  </body>
+</html>
