@@ -23,6 +23,10 @@ app.post('/create', (req, res) => {
   })
 })
 
+app.get('/create', (req, res) => {
+  res.render('create');
+})
+
 app.get('/details/:id', (req, res) => {
   mysql.getCityDetails(req.params.id).then((result) => {
     if (result.length !== 0)
