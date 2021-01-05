@@ -1,17 +1,24 @@
+const ejs = require('ejs');
 const express = require('express');
-const mysql = require('promise-mysql');
 
 const app = express();
-const pool = mysql.createPool({
-  connectionLimit: 16,
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'geography'
+
+app.set('view engine', 'ejs');
+
+app.get('/hos', (req, res) => {
+  res.render('hos');
+})
+
+app.get('/cities', (req, res) => {
+  res.render('cities');
+})
+
+app.get('/countries', (req, res) => {
+  res.render('countries');
 })
 
 app.get('/', (req, res) => {
-  res.send("Hello, world!");
+  res.render('index');
 })
 
 app.listen(3004, () => {
