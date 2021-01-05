@@ -1,3 +1,4 @@
+const parser = require('body-parser');
 const express = require('express');
 const mongo = require('./mongodb');
 const mysql = require('./mysql');
@@ -5,6 +6,18 @@ const mysql = require('./mysql');
 const app = express();
 
 app.set('view engine', 'ejs');
+app.use(parser.urlencoded({
+  extended: false
+}));
+app.user(parser.json());
+
+app.post('/create', (req, res) => {
+  mysql.addCountry(req.body.code, req.body.name, req.body.details).then((result) => {
+    res.send("Successfully added");
+  }).catch((err) => {
+    console.log(err);
+  })
+})
 
 app.get('/details/:id', (req, res) => {
   mysql.getCityDetails(req.params.id).then((result) => {

@@ -13,6 +13,20 @@ mysql.createPool({
   console.log(err);
 })
 
+var addCountry = function(code, name, details) {
+  return new Promise((resolve, reject) => {
+    let q = {
+      sql: 'insert into country (co_code, co_name, co_details) values (?, ?, ?)',
+      values: [code, name, details]
+    };
+    pool.query(q).then((result) => {
+      resolve(result);
+    }).catch((err) => {
+      reject(err);
+    })
+  })
+}
+
 var getCityDetails = function(id) {
   return new Promise((resolve, reject) => {
     let q = {
@@ -61,4 +75,4 @@ var getCities = function() {
   })
 }
 
-module.exports = {getCountries, getCities, delCountry, getCityDetails}
+module.exports = {getCountries, getCities, delCountry, getCityDetails, addCountry}
