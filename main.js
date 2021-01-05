@@ -11,7 +11,11 @@ app.get('/hos', (req, res) => {
 })
 
 app.get('/cities', (req, res) => {
-  res.render('cities');
+  mysql.getCities().then((result) => {
+    res.render('cities', {cities: result})
+  }).catch((err) => {
+    res.send(err);
+  })
 })
 
 app.get('/countries', (req, res) => {
