@@ -1,6 +1,8 @@
+/* Includes/requires. */
 const { query } = require('express');
 const mysql = require('promise-mysql');
 
+/* Connect. */
 mysql.createPool({
   connectionLimit: 2,
   host: 'localhost',
@@ -13,6 +15,9 @@ mysql.createPool({
   console.log(err);
 })
 
+/* Simple function to check if a co_code already exists
+ * in table.
+ */
 var countryExists = function(code) {
   let q = {
     sql: 'select * from country where co_code = ?',

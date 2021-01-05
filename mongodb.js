@@ -1,5 +1,6 @@
 const mongo = require('mongodb').MongoClient;
 
+/* Connect to MongoDB database. */
 mongo.connect('mongodb://localhost:27017').then((client) => {
   db = client.db('headsOfStateDB')
   coll = db.collection('headsOfState')

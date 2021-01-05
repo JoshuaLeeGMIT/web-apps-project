@@ -65,7 +65,7 @@ app.post('/create', (req, res) => {
     values: [req.body.code, req.body.name, req.body.details]
   };
   mysql.addCountry(q).then((result) => {
-    res.send("Successfully added");
+    res.render('countries');
   }).catch((err) => {
     console.log(err);
   })
