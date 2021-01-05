@@ -1,4 +1,3 @@
-const ejs = require('ejs');
 const express = require('express');
 const mongo = require('./mongodb');
 const mysql = require('./mysql');
