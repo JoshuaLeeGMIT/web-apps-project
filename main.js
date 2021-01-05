@@ -11,7 +11,7 @@ app.get('/details/:id', (req, res) => {
   mysql.getCityDetails(req.params.id).then((result) => {
     res.render('city-details', {city: result})
   }).catch((err) => {
-    console.log(err);
+    res.send("No city with code " + id);
   })
 })
 
